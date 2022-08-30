@@ -4,7 +4,9 @@ import com.bank.msbootcointransactionbackend.constants.Constant;
 import com.bank.msbootcointransactionbackend.handler.ResponseHandler;
 import com.bank.msbootcointransactionbackend.models.dao.TransactionDao;
 import com.bank.msbootcointransactionbackend.models.documents.Transaction;
+import com.bank.msbootcointransactionbackend.models.enums.StatusEnum;
 import com.bank.msbootcointransactionbackend.models.utils.DataEvent;
+import com.bank.msbootcointransactionbackend.models.utils.Status;
 import com.bank.msbootcointransactionbackend.producer.KafkaProducer;
 import com.bank.msbootcointransactionbackend.services.TransactionService;
 import org.slf4j.Logger;
@@ -57,7 +59,7 @@ public class TransactionServiceImpl implements TransactionService {
         dataEvent.setDateEvent(LocalDateTime.now());
         transaction.setTicket(UUID.randomUUID().toString());
         transaction.setTimeStamp(LocalDateTime.now());
-        transaction.setState(Constant.STATUS_TRANSACTION_RECEIVED);
+        transaction.setStatus(new Status(StatusEnum.RECEIVED.getCode(),StatusEnum.RECEIVED.getDescription()));
         dataEvent.setData(transaction);
 
         kafkaProducer.sendMessage(dataEvent);
@@ -103,7 +105,7 @@ public class TransactionServiceImpl implements TransactionService {
                 .collectList()
                 .doOnNext(transaction -> log.info(transaction.toString()))
                 .map(transactions -> new ResponseHandler(Constant.RESPONSE_DONE, HttpStatus.OK, transactions))
-                .onErrorResume(error -> Mono.just(new ResponseHandler(error.getMessage(), HttpStatus.BAD_REQUEST, null)))
+                .onErrorResume(error -> Mono.just(new ResponseHandler(error.getMessage(), HttpStatus.BAD_REQUEST, error)))
                 .switchIfEmpty(Mono.just(new ResponseHandler(Constant.RESPONSE_NOT_CONTENT, HttpStatus.BAD_REQUEST, null)))
                 .doFinally(fin -> log.info("[END] findByTicket transaction"));
     }

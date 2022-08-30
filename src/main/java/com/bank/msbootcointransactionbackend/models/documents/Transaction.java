@@ -1,6 +1,7 @@
 package com.bank.msbootcointransactionbackend.models.documents;
 
 import com.bank.msbootcointransactionbackend.models.enums.PayMode;
+import com.bank.msbootcointransactionbackend.models.utils.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -8,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+
 
 @Data
 @Document(collection = "transactions")
@@ -42,5 +44,5 @@ public class Transaction {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime timeStamp;
 
-    private String state;
+    private Status status;
 }
