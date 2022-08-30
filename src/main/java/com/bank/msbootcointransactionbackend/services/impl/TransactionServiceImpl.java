@@ -57,7 +57,7 @@ public class TransactionServiceImpl implements TransactionService {
         dataEvent.setDateEvent(LocalDateTime.now());
         transaction.setTicket(UUID.randomUUID().toString());
         transaction.setTimeStamp(LocalDateTime.now());
-        transaction.setState(Constant.STATUS_TRANSACTION_CREATE);
+        transaction.setState(Constant.STATUS_TRANSACTION_RECEIVED);
         dataEvent.setData(transaction);
 
         kafkaProducer.sendMessage(dataEvent);
