@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
@@ -33,10 +34,10 @@ public class Transaction {
     private String recipientName;
 
     @NotNull(message = "rateAmount must not be null")
-    private float rateAmount;
+    private Double rateAmount;
 
     @NotNull(message = "amount must not be null")
-    private float amount;
+    private BigDecimal amount;
 
     @NotNull(message = "payMode must not be null")
     private PayMode payMode;
