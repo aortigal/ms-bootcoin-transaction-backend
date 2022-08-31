@@ -64,7 +64,7 @@ public class TransactionServiceImpl implements TransactionService {
 
         kafkaProducer.sendMessage(dataEvent);
         log.info("[END] create Transaction");
-        return Mono.just(new ResponseHandler(Constant.RESPONSE_DONE, HttpStatus.OK, transaction));
+        return Mono.just(new ResponseHandler(Constant.RESPONSE_DONE, HttpStatus.OK, dataEvent.getData()));
     }
 
     @Override
