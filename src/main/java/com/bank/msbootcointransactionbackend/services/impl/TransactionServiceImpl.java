@@ -55,7 +55,7 @@ public class TransactionServiceImpl implements TransactionService {
         log.info("[INI] create Transaction");
         DataEvent<Transaction> dataEvent = new DataEvent<>();
         dataEvent.setId(UUID.randomUUID().toString());
-        dataEvent.setProcess(Constant.PROCESS_TRANSACTION_CREATE);
+        dataEvent.setProcess(Constant.PROCESS_BOOTCOIN_TRANSACTION_CREATE);
         dataEvent.setDateEvent(LocalDateTime.now());
         transaction.setTicket(UUID.randomUUID().toString());
         transaction.setTimeStamp(LocalDateTime.now());
@@ -72,7 +72,7 @@ public class TransactionServiceImpl implements TransactionService {
         log.info("[INI] update Transaction");
         DataEvent<Transaction> dataEvent = new DataEvent<>();
         dataEvent.setId(UUID.randomUUID().toString());
-        dataEvent.setProcess(Constant.PROCESS_TRANSACTION_UPDATE);
+        dataEvent.setProcess(Constant.PROCESS_BOOTCOIN_TRANSACTION_UPDATE);
         dataEvent.setDateEvent(LocalDateTime.now());
 
         transaction.setId(id);

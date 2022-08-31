@@ -8,8 +8,8 @@ public class Constant {
 
     public static final String RESPONSE_NOT_CONTENT = "No Content";
 
-    public static final String PROCESS_TRANSACTION_CREATE = "01";
+    public static final String PROCESS_BOOTCOIN_TRANSACTION_CREATE = "05";
 
-    public static final String PROCESS_TRANSACTION_UPDATE = "02";
+    public static final String PROCESS_BOOTCOIN_TRANSACTION_UPDATE = "06";
 
 }
